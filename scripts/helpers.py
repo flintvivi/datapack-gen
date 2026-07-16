@@ -34,7 +34,7 @@ def removeUFolder(pack_id):
 
 
 def uBasicFolderStruct(pack_id, namespace):
-    # create the folder structure for the user with the given pack_id
+    # create the basic folder structure for the user with the given pack_id
     try:
         os.makedirs(f'output/{pack_id}/data', exist_ok=True)
         os.makedirs(f'output/{pack_id}/data/{namespace}', exist_ok=True)
@@ -45,6 +45,58 @@ def uBasicFolderStruct(pack_id, namespace):
     else:
         print(f'Folder structure created')
         return f'output/{pack_id}/data/{namespace}/'
+
+
+def uFuncFolderStruct(pack_id, namespace):
+    # create the mcfunctions folder structure for the user with the given pack_id
+    try:
+        os.makedirs(f'output/{pack_id}/data/{namespace}/functions', exist_ok=True)
+    except OSError as error:
+        raise RuntimeError(f'Failed to create folder structure! {error}')
+    if not os.path.exists(f'output/{pack_id}/data/{namespace}/functions'):
+        raise RuntimeError(f'Failed to create folder structure!')
+    else:
+        print(f'Folder structure created')
+        return f'output/{pack_id}/data/{namespace}/functions/'
+    
+
+def uTagFolderStruct(pack_id, namespace):
+    # create the tag folder structure for the user with the given pack_id
+    try:
+        os.makedirs(f'output/{pack_id}/data/{namespace}/tags/functions', exist_ok=True)
+    except OSError as error:
+        raise RuntimeError(f'Failed to create folder structure! {error}')
+    if not os.path.exists(f'output/{pack_id}/data/{namespace}/tags/functions'):
+        raise RuntimeError(f'Failed to create folder structure!')
+    else:
+        print(f'Folder structure created')
+        return f'output/{pack_id}/data/{namespace}/tags/functions/'
+    
+
+def uAdvFolderStruct(pack_id, namespace):
+    # create the advancement folder structure for the user with the given pack_id
+    try:
+        os.makedirs(f'output/{pack_id}/data/{namespace}/advancements', exist_ok=True)
+    except OSError as error:
+        raise RuntimeError(f'Failed to create folder structure! {error}')
+    if not os.path.exists(f'output/{pack_id}/data/{namespace}/advancements'):
+        raise RuntimeError(f'Failed to create folder structure!')
+    else:
+        print(f'Folder structure created')
+        return f'output/{pack_id}/data/{namespace}/advancements/'
+
+
+def uRecipeFolderStruct(pack_id, namespace):
+    # create the recipe folder structure for the user with the given pack_id
+    try:
+        os.makedirs(f'output/{pack_id}/data/{namespace}/recipes', exist_ok=True)
+    except OSError as error:
+        raise RuntimeError(f'Failed to create folder structure! {error}')
+    if not os.path.exists(f'output/{pack_id}/data/{namespace}/recipes'):
+        raise RuntimeError(f'Failed to create folder structure!')
+    else:
+        print(f'Folder structure created')
+        return f'output/{pack_id}/data/{namespace}/recipes/'
 
 
 def genmeta(pack_id, description):
