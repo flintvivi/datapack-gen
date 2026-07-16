@@ -2,6 +2,7 @@ import os
 import uuid
 
 from flask import Flask, render_template, session
+from scripts import helpers
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
