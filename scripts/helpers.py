@@ -1,5 +1,10 @@
 # helper functions for generation! yippee
 import os
+import uuid
+
+def makePackID():
+    # generate a unique pack id
+    return str(uuid.uuid4().hex)
 
 
 def makeUFolder(pack_id):
