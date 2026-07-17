@@ -103,12 +103,12 @@ def genmeta(pack_id, description):
     with open(f'output/{pack_id}/pack.mcmeta', 'w') as file:
         try:
             file.write(f'''
-                {{
-                "pack": {{
-                        "pack_format": 48,
-                        "description": "{description}"
-                    }}
-                }}
+    {{
+    "pack": {{
+            "pack_format": 48,
+            "description": "{description}"
+        }}
+    }}
             ''')
         except Exception as error:
             raise RuntimeError(f'Failed to write to file! {error}')
