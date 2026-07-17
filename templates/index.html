@@ -1,34 +1,17 @@
 {% extends "main.html" %}
 
 {% block main %}
-<header class=""></header>
-<div class="container mt-5 card-container">
-    <div class="card">
-        <!--about card-->
-        <img src="{{ url_for('static', filename='images/cat.jpg') }}" class="card-img-top" alt="Placeholder Image">
-        <div class="card-body">
-            <h2 class="card-title">About</h5>
-            <p class="card-text">Learn more about my project and its goals.</p>
-            <a href="#" class="btn btn-primary">Learn More</a>
+<main class="landing-shell">
+    <section class="dashboard-grid" aria-label="Dashboard preview">
+        <div class="stack stack-primary">
+            <div class="tile tile-large"></div>
+            <div class="tile tile-medium"></div>
         </div>
-    </div>
-    <div class="card">
-        <!--get started card-->
-        <img src="{{ url_for('static', filename='images/cat.jpg') }}" class="card-img-top" alt="Placeholder Image">
-        <div class="card-body">
-            <h1 class="card-title">Get Started</h5>
-            <p class="card-text">Ready to dive in?</p>
-            <a href="#" class="btn btn-primary">Create Pack</a>
+        <div class="stack stack-secondary">
+            <div class="tile tile-small"></div>
+            <div class="tile tile-wide"></div>
+            <div class="tile tile-small"></div>
         </div>
-    </div>
-    <div class="card">
-        <!--view source card-->
-        <img src="{{ url_for('static', filename='images/cat.jpg') }}" class="card-img-top" alt="Placeholder Image">
-        <div class="card-body">
-            <h2 class="card-title">View Source</h5>
-            <p class="card-text">Check out the source code on GitHub. Nerd.</p>
-            <a href="https://github.com/flintvivi/datapack-gen" class="btn btn-primary">View Source</a>
-        </div>
-    </div>
-</div>
+    </section>
+</main>
 {% endblock %}
