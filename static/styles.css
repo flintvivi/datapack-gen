@@ -77,6 +77,8 @@ body {
 .tile-header {
     padding: 1rem;
     font-weight: 600;
+    margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .tile-content {
@@ -107,6 +109,17 @@ body {
 
 .tool-card i {
     line-height: 1;
+}
+
+.tool-card .fa-arrow-right {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tool-card:hover .fa-arrow-right {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .tool-card h3 svg {
