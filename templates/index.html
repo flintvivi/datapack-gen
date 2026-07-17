@@ -30,13 +30,70 @@
                     </a>
                 </div>
             </div>
-            <div class="tile tile-medium"></div>
+            <div class="tile tile-medium">
+                <h2 class="text-left tile-header">Datapacks 101</h2>
+                <div class="tile-content">
+                    <p class="mb-2">Minecraft datapacks add or override data-driven game behavior without mods.</p>
+                    <ul class="mb-2 ps-3">
+                        <li>Each pack needs a <code>pack.mcmeta</code> file.</li>
+                        <li>Content lives under <code>data/&lt;namespace&gt;/</code>.</li>
+                        <li>Functions are plain <code>.mcfunction</code> command files.</li>
+                    </ul>
+                    <a href="https://minecraft.wiki/w/Data_pack" class="link-light" target="_blank" rel="noopener noreferrer">
+                        Learn more on Minecraft Wiki
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="stack stack-secondary">
-            <div class="tile tile-small"></div>
-            <div class="tile tile-wide"></div>
-            <div class="tile tile-small"></div>
+            <div class="tile tile-small">
+                <h2 class="text-left tile-header">CS50 appreciation</h2>
+                <div class="tile-content">
+                    <p class="mb-2">Built with CS50 energy: clear, useful, and fun.</p>
+                    <p class="mb-0">And yes, David J. Malan is absolutely cool.</p>
+                </div>
+            </div>
+            <div class="tile tile-wide">
+                <h2 class="text-left tile-header">About this project</h2>
+                <div class="tile-content">
+                    <p class="mb-1">Datapack Generator helps you bootstrap datapacks for Minecraft 1.21.1.</p>
+                    <p class="mb-0">Pick a generator, fill in your options, and export ready-to-drop files.</p>
+                </div>
+            </div>
+            <div class="tile tile-small">
+                <h2 class="text-left tile-header">Random quote</h2>
+                <div class="tile-content">
+                    <p id="quote-text" class="mb-2">Loading quote...</p>
+                    <button id="quote-refresh" class="btn btn-sm btn-outline-light" type="button">New quote</button>
+                </div>
+            </div>
         </div>
     </section>
 </main>
+<script>
+    const localQuotes = [
+        { content: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", author: "Martin Fowler" },
+        { content: "Programs must be written for people to read, and only incidentally for machines to execute.", author: "Harold Abelson" },
+        { content: "Simplicity is the soul of efficiency.", author: "Austin Freeman" },
+        { content: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
+        { content: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" }
+    ];
+
+    function loadQuote() {
+        const quoteText = document.getElementById("quote-text");
+        if (!quoteText) {
+            return;
+        }
+
+        const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
+        quoteText.textContent = `"${quote.content}" — ${quote.author}`;
+    }
+
+    const refreshButton = document.getElementById("quote-refresh");
+    if (refreshButton) {
+        refreshButton.addEventListener("click", loadQuote);
+    }
+
+    loadQuote();
+</script>
 {% endblock %}
