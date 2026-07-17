@@ -45,7 +45,7 @@ body {
 }
 
 .stack-secondary {
-    grid-template-rows: 0.9fr 1.45fr 0.9fr;
+    grid-template-rows: auto auto auto;
 }
 
 .tile {
