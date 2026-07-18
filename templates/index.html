@@ -39,7 +39,8 @@
                         <li>Content lives under <code>data/&lt;namespace&gt;/</code>.</li>
                         <li>Functions are plain <code>.mcfunction</code> command files.</li>
                     </ul>
-                    <a href="https://minecraft.wiki/w/Data_pack" class="link-light" target="_blank" rel="noopener noreferrer">
+                    <a href="https://minecraft.wiki/w/Data_pack" class="link-light" target="_blank"
+                        rel="noopener noreferrer">
                         Learn more on Minecraft Wiki
                     </a>
                 </div>
@@ -49,8 +50,10 @@
             <div class="tile tile-small">
                 <h2 class="text-left tile-header">CS50 appreciation</h2>
                 <div class="tile-content">
-                    <p class="mb-2">Built with CS50 energy: clear, useful, and fun.</p>
-                    <p class="mb-0">And yes, David J. Malan is absolutely cool.</p>
+                    <p class="mb-2">Built for Harvard CS50x's final project.</p>
+                    <p class="mb-0">Learn more about CS50x here: <a href="https://cs50.harvard.edu/x/2026/"
+                            class="link-light" target="_blank" rel="noopener noreferrer">CS50x - Introduction to
+                            Computer Science</a></p>
                 </div>
             </div>
             <div class="tile tile-wide">
@@ -58,6 +61,7 @@
                 <div class="tile-content">
                     <p class="mb-1">Datapack Generator helps you bootstrap datapacks for Minecraft 1.21.1.</p>
                     <p class="mb-0">Pick a generator, fill in your options, and export ready-to-drop files.</p>
+                    <p class="mb-0">Or, create the framework for coding your own datapack.</p>
                 </div>
             </div>
             <div class="tile tile-small">
@@ -71,13 +75,24 @@
     </section>
 </main>
 <script>
-    const localQuotes = [
-        { content: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", author: "Martin Fowler" },
-        { content: "Programs must be written for people to read, and only incidentally for machines to execute.", author: "Harold Abelson" },
-        { content: "Simplicity is the soul of efficiency.", author: "Austin Freeman" },
-        { content: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
-        { content: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" }
-    ];
+    let localQuotes = [];
+
+    async function loadQuotes() {
+        try {
+            const response = await fetch("{{ url_for('static', filename='quotes.txt') }}");
+            if (!response.ok) {
+                throw new Error("Failed to load quotes");
+            }
+
+            const text = await response.text();
+            localQuotes = text
+                .split(/\r?\n/)
+                .map((line) => line.trim())
+                .filter(Boolean);
+        } catch (error) {
+            localQuotes = [];
+        }
+    }
 
     function loadQuote() {
         const quoteText = document.getElementById("quote-text");
@@ -85,8 +100,13 @@
             return;
         }
 
+        if (!localQuotes.length) {
+            quoteText.textContent = "No quotes available.";
+            return;
+        }
+
         const quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
-        quoteText.textContent = `"${quote.content}" — ${quote.author}`;
+        quoteText.textContent = `${quote}`;
     }
 
     const refreshButton = document.getElementById("quote-refresh");
@@ -94,6 +114,6 @@
         refreshButton.addEventListener("click", loadQuote);
     }
 
-    loadQuote();
+    loadQuotes().then(loadQuote);
 </script>
 {% endblock %}
