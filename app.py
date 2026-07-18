@@ -12,6 +12,10 @@ def ensure_pack_id():
     if 'pack_id' not in session:
         session['pack_id'] = helpers.makePackID()
 
+@app.errorhandler(404)
+def notfound(e):
+    return render_template('404.html'), 404
+
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
