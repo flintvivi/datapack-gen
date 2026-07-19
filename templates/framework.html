@@ -2,6 +2,50 @@
 
 {% block main %}
 <main class="landing-shell">
-    Hello, World!
+    <section class="dashboard-grid justify-content-center" aria-label="Framework preview">
+        <div class="stack stack-primary">
+            <div class="tile tile-large">
+                <h6 class="text-left tile-subheader">* = required</h6>
+                <h2 class="text-left tile-header">Blank Pack</h2>
+                <div class="tool-body">
+                    <div class="tool-card">
+                        <form action="/framework" method="POST">
+                            <input required class="form-input" type="text" name="namespace" id="namespace" placeholder="Namespace*">
+                            <input required class="form-input" type="text" name="dpname" id="dpname" placeholder="Pack name*">
+                            <input class="form-input" type="text" name="description" id="description" placeholder="Description">
+                            <button class="form-submit" type="sumbit">Generate</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stack stack-secondary">
+            <div class="tile tile-wide">
+                <h2 class="text-left tile-header">Other Generators</h2>
+                <div style="margin-left: 1%">
+                    <a class="tool-card" href="#">
+                        <h3 class="text-[1.17em]">Enchantments</h3>
+                        <i class="fa-solid fa-book"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a class="tool-card" href="#">
+                        <h3 class="text-[1.17em]">Recipes</h3>
+                        <i class="fa-solid fa-table-cells"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a class="tool-card" href="#">
+                        <h3 class="text-[1.17em]">Advancements</h3>
+                        <i class="fa-solid fa-flag"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <hr style="margin-left:-1%">
+                    <a class="tool-card" style="padding-bottom: 5%" href="/">
+                        <h3 class="text-[1.17em]">Home</h3>
+                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+    </section>
 </main>
 {% endblock %}

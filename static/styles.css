@@ -81,6 +81,13 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.tile-subheader {
+    padding: 1em;
+    font-style: italic;
+    margin: 0;
+    font-size: smaller;
+}
+
 .tile-content {
     padding: 1rem;
 }
@@ -177,4 +184,30 @@ body {
         min-height: 120px;
         border-radius: 16px;
     }
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 1%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-submit {
+    width: 100%;
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-submit:hover {
+    background-color: #45a049;
 }

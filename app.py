@@ -25,7 +25,11 @@ def framework():
     if request.method == 'POST':
         pack_id = session.get('pack_id')
         if not pack_id:
-            return render_template('400.html'), 400
+            return # temporary
+            # return apology('Pack ID not found in session. Try deleting your cookies', 400) TODO: implement
+    else:
+        pack_id = session.get('pack_id')
+        return render_template('framework.html')
 
         namespace = request.form.get('namespace')
         try:
