@@ -1,6 +1,8 @@
-# helper functions for generation! yippee
+# helper functions! yippee
 import os
 import uuid
+
+from flask import render_template
 
 def makePackID():
     # generate a unique pack id
@@ -116,3 +118,29 @@ def genmeta(pack_id, description):
     # return the path to the generated pack.mcmeta file
     return f'output/{pack_id}/pack.mcmeta'
 
+
+def escape(s):
+        """
+        Escape special characters.
+
+        https://github.com/jacebrowning/memegen#special-characters
+        """
+        for old, new in [
+            ("-", "--"),
+            (" ", "-"),
+            ("_", "__"),
+            ("?", "~q"),
+            ("%", "~p"),
+            ("#", "~h"),
+            ("/", "~s"),
+            ('"', "''"),
+        ]:
+            s = s.replace(old, new)
+        return s
+
+
+def apology(message, code):
+    # render message as an apology to user
+    # modified function from cs50
+    
+    return render_template("apology.html", top=code, bottom=escape(message)), code

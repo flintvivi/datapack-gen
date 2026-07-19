@@ -14,7 +14,11 @@ def ensure_pack_id():
 
 @app.errorhandler(404)
 def notfound(e):
-    return render_template('404.html'), 404
+    return helpers.apology('not found', 404)
+
+@app.errorhandler(500)
+def internalerror(e):
+    return helpers.apology('internal server error', 500)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -30,11 +34,3 @@ def framework():
     else:
         pack_id = session.get('pack_id')
         return render_template('framework.html')
-
-        namespace = request.form.get('namespace')
-        try:
-            helpers.uBasicFolderStruct(pack_id, namespace)
-        except RuntimeError as e:
-            return str(e), 500
-
-        return render_template('framework.html', pack_id=pack_id, namespace=namespace)
