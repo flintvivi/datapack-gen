@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, session
+from flask import Flask, render_template, request, session
 from scripts import helpers
 
 app = Flask(__name__)
@@ -19,3 +19,18 @@ def notfound(e):
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
+
+@app.route('/framework', methods=['GET', 'POST'])
+def framework():
+    if request.method == 'POST':
+        pack_id = session.get('pack_id')
+        if not pack_id:
+            return render_template('400.html'), 400
+
+        namespace = request.form.get('namespace')
+        try:
+            helpers.uBasicFolderStruct(pack_id, namespace)
+        except RuntimeError as e:
+            return str(e), 500
+
+        return render_template('framework.html', pack_id=pack_id, namespace=namespace)
