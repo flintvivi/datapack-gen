@@ -155,7 +155,6 @@ def check(page: str):
         namespace = request.form.get('namespace')
         dpname = request.form.get('dpname')
         authors = request.form.get('authors')
-        target = "<class \'str\'>"
 
         # checks for null inputs
         if not namespace:
@@ -166,5 +165,5 @@ def check(page: str):
             return apology('author(s) are required', 400)
         
         # checks for invalid inputs
-        if type(namespace) or type(dpname) or type(authors) != target:
+        if not isinstance(namespace, str) or not isinstance(dpname, str) or not isinstance(authors, str):
             return apology('one or more inputs was invalid', 400)
