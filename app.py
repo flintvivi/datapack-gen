@@ -27,10 +27,11 @@ def index():
 @app.route('/framework', methods=['GET', 'POST'])
 def framework():
     if request.method == 'POST':
+        # make sure we have stuff
         pack_id = session.get('pack_id')
         if not pack_id:
-            return # temporary
-            # return apology('Pack ID not found in session. Try deleting your cookies', 400) TODO: implement
+            return helpers.apology('pack_id is missing, try deleting cookies', 400)
+        helpers.check("framework")
     else:
         pack_id = session.get('pack_id')
         return render_template('framework.html')
