@@ -2,7 +2,7 @@
 import os
 import uuid
 
-from flask import render_template
+from flask import render_template, request
 
 def makePackID():
     # generate a unique pack id
@@ -144,3 +144,27 @@ def apology(message, code):
     # modified function from cs50
     
     return render_template("apology.html", top=code, bottom=escape(message)), code
+
+
+def check(page: str):
+    # run checks on user input
+    if not page:
+        raise RuntimeError("Page is not defined!")
+    
+    if page == "framework":
+        namespace = request.form.get('namespace')
+        dpname = request.form.get('dpname')
+        authors = request.form.get('authors')
+        target = "<class \'str\'>"
+
+        # checks for null inputs
+        if not namespace:
+            return apology('namespace is required', 400)
+        elif not dpname:
+            return apology('datapack name is required', 400)
+        elif not authors:
+            return apology('author(s) are required', 400)
+        
+        # checks for invalid inputs
+        if type(namespace) or type(dpname) or type(authors) != target:
+            return apology('one or more inputs was invalid', 400)
