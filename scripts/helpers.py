@@ -1,6 +1,8 @@
-# helper functions for generation! yippee
+# helper functions! yippee
 import os
 import uuid
+
+from flask import render_template, request
 
 def makePackID():
     # generate a unique pack id
@@ -116,3 +118,70 @@ def genmeta(pack_id, description):
     # return the path to the generated pack.mcmeta file
     return f'output/{pack_id}/pack.mcmeta'
 
+
+def escape(s):
+        """
+        Escape special characters.
+
+        https://github.com/jacebrowning/memegen#special-characters
+        """
+        for old, new in [
+            ("-", "--"),
+            (" ", "-"),
+            ("_", "__"),
+            ("?", "~q"),
+            ("%", "~p"),
+            ("#", "~h"),
+            ("/", "~s"),
+            ('"', "''"),
+        ]:
+            s = s.replace(old, new)
+        return s
+
+
+def apology(message, code):
+    # render message as an apology to user
+    # modified function from cs50
+    
+    return render_template("apology.html", top=code, bottom=escape(message)), code
+
+
+def check(page: str):
+    # run checks on user input
+    if not page:
+        raise RuntimeError("check(): Missing page parameter")
+    
+    if page == "framework":
+        namespace = request.form.get('namespace')
+        dpname = request.form.get('dpname')
+        authors = request.form.get('authors')
+
+        # checks for null inputs
+        for value, message in (
+            (namespace, 'namespace is required'),
+            (dpname, 'datapack name is required'),
+            (authors, 'author(s) are required'),
+        ):
+            if not value:
+                return apology(message, 400)
+        
+        # checks for invalid inputs
+        if not all(isinstance(value, str) for value in (namespace, dpname, authors)):
+            return apology('one or more inputs was invalid', 400)
+
+        # checks for invalid characters in inputs
+        invalid_chars = set('<>:"/\\|?*') # invalid characters for file/folder names
+        if any(char in invalid_chars for char in (namespace, dpname, authors)):
+            return apology('one or more inputs contains invalid characters', 400)
+
+        return True
+
+def blankPack(pack_id, namespace, dpname, authors):
+    # create a blank datapack with the given parameters
+    try:
+        makeUFolder(pack_id)
+        uBasicFolderStruct(pack_id, namespace)
+        genmeta(pack_id, f'{dpname} by {authors}')
+    except Exception as error:
+        raise RuntimeError(f'Failed to create blank datapack! {error}')
+    return True
