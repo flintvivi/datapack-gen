@@ -165,5 +165,5 @@ def check(page: str):
             return apology('author(s) are required', 400)
         
         # checks for invalid inputs
-        if not isinstance(namespace, str) or not isinstance(dpname, str) or not isinstance(authors, str):
+        if not all(isinstance(value, str) for value in (namespace, dpname, authors)):
             return apology('one or more inputs was invalid', 400)
