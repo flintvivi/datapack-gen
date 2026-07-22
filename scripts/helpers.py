@@ -149,7 +149,7 @@ def apology(message, code):
 def check(page: str):
     # run checks on user input
     if not page:
-        raise RuntimeError("Page is not defined!")
+        raise RuntimeError("check(): Missing page parameter")
     
     if page == "framework":
         namespace = request.form.get('namespace')
@@ -157,13 +157,21 @@ def check(page: str):
         authors = request.form.get('authors')
 
         # checks for null inputs
-        if not namespace:
-            return apology('namespace is required', 400)
-        elif not dpname:
-            return apology('datapack name is required', 400)
-        elif not authors:
-            return apology('author(s) are required', 400)
+        for value, message in (
+            (namespace, 'namespace is required'),
+            (dpname, 'datapack name is required'),
+            (authors, 'author(s) are required'),
+        ):
+            if not value:
+                return apology(message, 400)
         
         # checks for invalid inputs
         if not all(isinstance(value, str) for value in (namespace, dpname, authors)):
             return apology('one or more inputs was invalid', 400)
+
+        # checks for invalid characters in inputs
+        invalid_chars = set('<>:"/\\|?*') # invalid characters for file/folder names
+        if any(char in invalid_chars for char in (namespace, dpname, authors)):
+            return apology('one or more inputs contains invalid characters', 400)
+
+        return True
