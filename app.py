@@ -32,6 +32,17 @@ def framework():
         if not pack_id:
             return helpers.apology('pack_id is missing, try deleting cookies', 400)
         helpers.check("framework")
+
+        # give the user their datapack yayyy
+        try:
+            helpers.makeDatapack(
+                namespace=request.form.get('namespace'),
+                dpname=request.form.get('dpname'),
+                authors=request.form.get('authors'),
+                pack_id=pack_id
+            )
+        except Exception as error:
+            return helpers.apology(f'Failed to create datapack! {error}', 500)
     else:
         pack_id = session.get('pack_id')
         return render_template('framework.html')
