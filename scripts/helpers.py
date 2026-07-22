@@ -175,3 +175,13 @@ def check(page: str):
             return apology('one or more inputs contains invalid characters', 400)
 
         return True
+
+def blankPack(pack_id, namespace, dpname, authors):
+    # create a blank datapack with the given parameters
+    try:
+        makeUFolder(pack_id)
+        uBasicFolderStruct(pack_id, namespace)
+        genmeta(pack_id, f'{dpname} by {authors}')
+    except Exception as error:
+        raise RuntimeError(f'Failed to create blank datapack! {error}')
+    return True
